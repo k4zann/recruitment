@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"recruitment/types"
 	"recruitment/utils"
-	"strconv"
 
 	"github.com/gorilla/mux"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type EmployerHandler struct {
@@ -57,7 +57,7 @@ func (h *EmployerHandler) getEmployer(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	employerId, err := strconv.Atoi(id)
+	employerId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)
 		return
@@ -76,7 +76,7 @@ func (h *EmployerHandler) deleteEmployer(w http.ResponseWriter, r *http.Request)
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	employerId, err := strconv.Atoi(id)
+	employerId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)
 		return

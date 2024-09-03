@@ -4,6 +4,8 @@ import (
 	"context"
 	"recruitment/types"
 
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -16,7 +18,10 @@ func NewStore(mongoCollection *mongo.Collection) *Store {
 }
 
 func (s *Store) CreateEmployee(employee types.Employee) error {
-	_, err := s.MongoCollection.InsertOne(context.Background(), employee)
+	_, err := s.MongoCollection.InsertOne(
+		context.Background(),
+		employee,
+	)
 	if err != nil {
 		return err
 	}
@@ -24,12 +29,14 @@ func (s *Store) CreateEmployee(employee types.Employee) error {
 	return nil
 }
 
-func (s *Store) GetEmployee(id int) (*types.Employee, error) {
+func (s *Store) GetEmployee(id primitive.ObjectID) (*types.Employee, error) {
 	var employee types.Employee
 
+	// Find the employee by ObjectID
 	err := s.MongoCollection.FindOne(
-		context.Background(), 
-		map[string]int{"_id": id}).Decode(&employee)
+		context.Background(),
+		bson.M{"_id": id},
+	).Decode(&employee)
 	if err != nil {
 		return nil, err
 	}
@@ -41,8 +48,8 @@ func (s *Store) GetEmployees() ([]types.Employee, error) {
 	var employees []types.Employee
 
 	cursor, err := s.MongoCollection.Find(
-		context.Background(), 
-		map[string]int{},
+		context.Background(),
+		bson.M{},
 	)
 	if err != nil {
 		return nil, err
@@ -52,7 +59,7 @@ func (s *Store) GetEmployees() ([]types.Employee, error) {
 
 	for cursor.Next(context.Background()) {
 		var employee types.Employee
-	
+
 		err := cursor.Decode(&employee)
 		if err != nil {
 			return nil, err
@@ -64,10 +71,10 @@ func (s *Store) GetEmployees() ([]types.Employee, error) {
 	return employees, nil
 }
 
-func (s *Store) DeleteEmployee(id int) error {
+func (s *Store) DeleteEmployee(id primitive.ObjectID) error {
 	_, err := s.MongoCollection.DeleteOne(
-		context.Background(), 
-		map[string]int{"_id": id},
+		context.Background(),
+		bson.M{"_id": id},
 	)
 	if err != nil {
 		return err

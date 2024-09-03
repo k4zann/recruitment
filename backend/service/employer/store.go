@@ -4,6 +4,8 @@ import (
 	"context"
 	"recruitment/types"
 
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -24,12 +26,12 @@ func (s *Store) CreateEmployer(employer types.Employer) error {
 	return nil
 }
 
-func (s *Store) GetEmployer(id int) (*types.Employer, error) {
+func (s *Store) GetEmployer(id primitive.ObjectID) (*types.Employer, error) {
 	var employer types.Employer
 
 	err := s.MongoCollection.FindOne(
 		context.Background(),
-		map[string]int{"_id": id}).Decode(&employer)
+		bson.M{"_id": id}).Decode(&employer)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +44,7 @@ func (s *Store) GetEmployers() ([]types.Employer, error) {
 
 	cursor, err := s.MongoCollection.Find(
 		context.Background(),
-		map[string]int{},
+		bson.M{},
 	)
 	if err != nil {
 		return nil, err
@@ -64,10 +66,10 @@ func (s *Store) GetEmployers() ([]types.Employer, error) {
 	return employers, nil
 }
 
-func (s *Store) DeleteEmployer(id int) error {
+func (s *Store) DeleteEmployer(id primitive.ObjectID) error {
 	_, err := s.MongoCollection.DeleteOne(
 		context.Background(),
-		map[string]int{"_id": id},
+		bson.M{"_id": id},
 	)
 	if err != nil {
 		return err

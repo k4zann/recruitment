@@ -16,6 +16,9 @@ type ApiServer struct {
 }
 
 func NewApiServer(addr string, db *mongo.Database) *ApiServer {
+	if db == nil {
+		log.Fatalf("Failed to initialize ApiServer: Database is nil")
+	}
 	return &ApiServer{addr: addr, db: db}
 }
 
@@ -24,18 +27,19 @@ func (s *ApiServer) Run() error {
 
 	subRouter := router.PathPrefix("/api").Subrouter()
 
-	employeeStore := employee.NewStore(s.db.Collection("employees"))
-
+	employeeStore := employee.NewStore(s.db.Collection("employee"))
 	employeeHandler := employee.NewEmployeeHandler(employeeStore)
 	employeeHandler.RegisterRoutes(subRouter)
 
 	employerStore := employer.NewStore(s.db.Collection("employers"))
-
 	employerHandler := employer.NewEmployerHandler(employerStore)
 	employerHandler.RegisterRoutes(subRouter)
 
+	log.Println("Listening on ", s.addr)
 
-	log.Fatal("Listening on ", s.addr)
+	if err := http.ListenAndServe(s.addr, router); err != nil {
+		log.Fatal("Server failed to start: ", err)
+	}
 
-	return http.ListenAndServe(s.addr, router)
+	return nil
 }
