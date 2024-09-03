@@ -21,10 +21,10 @@ type Employer struct {
 }
 
 type CreateEmployerPayload struct {
-	CompanyName       string `json:"company_name"`
-	Sphere            string `json:"sphere"`
-	Address           string `json:"address"`
-	Telephone         string `json:"telephone"`
-	Email             string `json:"email"`
+	CompanyName       string `json:"company_name" validate:"required"`
+	Sphere            string `json:"sphere" validate:"required"`
+	Address           string `json:"address" validate:"required"`
+	Telephone         string `json:"telephone" validate:"required"`
+	Email             string `json:"email" validate:"required,email"`
 	NumberOfEmployees int    `json:"number_of_employees"`
 }

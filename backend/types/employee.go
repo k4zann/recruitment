@@ -21,10 +21,10 @@ type Employee struct {
 }
 
 type CreateEmployeePayload struct {
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
+	FirstName string `json:"first_name" validate:"required"`
+	LastName  string `json:"last_name" validate:"required"`
 	BirthDate string `json:"birth_date"`
-	Telephone string `json:"telephone"`
-	Email     string `json:"email"`
-	Address   string `json:"address"`
+	Telephone string `json:"telephone" validate:"required"`
+	Email     string `json:"email" validate:"required,email"`
+	Address   string `json:"address" validate:"required"`
 }
