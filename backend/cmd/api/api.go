@@ -6,6 +6,7 @@ import (
 	"recruitment/service/employee"
 	"recruitment/service/employer"
 	"recruitment/service/resume"
+	"recruitment/service/vacancy"
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -44,6 +45,9 @@ func (s *ApiServer) Run() error {
 	resumeHandler.RegisterRoutes(subRouter)
 
 	// vacancy routes
+	vacancyStore := vacancy.NewStore(s.db.Collection("vacancy"))
+	vacancyHandler := vacancy.NewVacancyHandler(vacancyStore)
+	vacancyHandler.RegisterRoutes(subRouter)
 
 	log.Println("Listening on ", s.addr)
 

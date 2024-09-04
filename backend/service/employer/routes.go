@@ -9,6 +9,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type EmployerHandler struct {
@@ -29,7 +30,7 @@ func (h *EmployerHandler) RegisterRoutes(router *mux.Router) {
 
 func (h *EmployerHandler) createEmployer(w http.ResponseWriter, r *http.Request) {
 	var employer types.Employer
-	
+
 	if err := utils.ParseJson(r, &employer); err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)
 		return
@@ -73,6 +74,10 @@ func (h *EmployerHandler) getEmployer(w http.ResponseWriter, r *http.Request) {
 
 	employer, err := h.Store.GetEmployer(employerId)
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			utils.WriteError(w, http.StatusNotFound, err)
+			return
+		}
 		utils.WriteError(w, http.StatusInternalServerError, err)
 		return
 	}
