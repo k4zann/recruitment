@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"recruitment/service/employee"
 	"recruitment/service/employer"
+	"recruitment/service/resume"
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -27,13 +28,22 @@ func (s *ApiServer) Run() error {
 
 	subRouter := router.PathPrefix("/api").Subrouter()
 
+	// employee routes
 	employeeStore := employee.NewStore(s.db.Collection("employee"))
 	employeeHandler := employee.NewEmployeeHandler(employeeStore)
 	employeeHandler.RegisterRoutes(subRouter)
 
+	// employer routes
 	employerStore := employer.NewStore(s.db.Collection("employers"))
 	employerHandler := employer.NewEmployerHandler(employerStore)
 	employerHandler.RegisterRoutes(subRouter)
+
+	// resume routes
+	resumeStore := resume.NewStore(s.db.Collection("resume"))
+	resumeHandler := resume.NewResumeHandler(resumeStore)
+	resumeHandler.RegisterRoutes(subRouter)
+
+	// vacancy routes
 
 	log.Println("Listening on ", s.addr)
 
