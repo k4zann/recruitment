@@ -23,7 +23,7 @@
                 Найти работу
             </h2>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 m-auto">
             <div v-for="job in jobs.jobs.slice(0, limit || jobs.jobs.length)" :key="job.id" :job="job">
                 <JobListing
                     :job="job"
@@ -31,6 +31,7 @@
             </div>
         </div>
     </section>
+    
     <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">
       <a
         href="/jobs"
