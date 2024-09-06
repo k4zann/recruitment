@@ -42,7 +42,7 @@
                 class="flex justify-center mb-4 text-gray-500 align-middle md:justify-start"
               >
                 <i
-                  class="mr-2 text-lg text-orange-700 fa-solid fa-location-dot"
+                  class="mr-2 text-xl text-orange-700 pi pi-map-marker"
                 ></i>
                 <p class="text-orange-700">{{state.job.location}}</p>
               </div>
