@@ -56,7 +56,7 @@
       <RouterLink
         to="/jobs"
         class="block px-6 py-4 text-center text-white bg-black rounded-xl hover:bg-gray-700"
-        >View All Jobs</RouterLink
+        >Просмотреть все вакансии</RouterLink
       >
     </section>
 </template>

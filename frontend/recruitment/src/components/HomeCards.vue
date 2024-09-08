@@ -13,10 +13,10 @@
                 Ознакомьтесь с вакансиями и начните свою карьеру уже сегодня
             </p>
             <RouterLink
-              to="/jobs"
+              to="/resume/add"
               class="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
             >
-              Найти работу
+              Добавить резюме
             </RouterLink>
           </Card>
           <Card bg="bg-green-100">
