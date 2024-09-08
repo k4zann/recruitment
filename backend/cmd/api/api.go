@@ -8,6 +8,7 @@ import (
 	"recruitment/service/resume"
 	"recruitment/service/vacancy"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -46,12 +47,19 @@ func (s *ApiServer) Run() error {
 
 	// vacancy routes
 	vacancyStore := vacancy.NewStore(s.db.Collection("vacancy"))
-	vacancyHandler := vacancy.NewVacancyHandler(vacancyStore)
+	vacancyHandler := vacancy.NewVacancyHandler(vacancyStore, employerStore)
 	vacancyHandler.RegisterRoutes(subRouter)
 
 	log.Println("Listening on ", s.addr)
 
-	if err := http.ListenAndServe(s.addr, router); err != nil {
+	if err := http.ListenAndServe(
+		s.addr,
+		handlers.CORS(
+			handlers.AllowedOrigins([]string{"*"}),
+			handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"}),
+			handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
+		)(router),
+	); err != nil {
 		log.Fatal("Server failed to start: ", err)
 	}
 

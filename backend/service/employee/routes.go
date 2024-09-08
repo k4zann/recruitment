@@ -43,7 +43,6 @@ func (h *EmployeeHandler) createEmployee(w http.ResponseWriter, r *http.Request)
 	}
 
 	if err := h.store.CreateEmployee(types.Employee{
-		ID:        primitive.NewObjectID(),
 		FirstName: employee.FirstName,
 		LastName:  employee.LastName,
 		Email:     employee.Email,
@@ -55,7 +54,15 @@ func (h *EmployeeHandler) createEmployee(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	utils.WriteJson(w, http.StatusCreated, employee)
+	employees, err := h.store.GetEmployees()
+	if err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	result := employees[len(employees)-1]
+
+	utils.WriteJson(w, http.StatusCreated, result)
 }
 func (h *EmployeeHandler) getEmployee(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)

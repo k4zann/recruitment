@@ -47,6 +47,14 @@ func (h *EmployerHandler) createEmployer(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	employers, err := h.Store.GetEmployers(); 
+	if err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	employer = employers[len(employers)-1]
+
 	utils.WriteJson(w, http.StatusCreated, employer)
 }
 

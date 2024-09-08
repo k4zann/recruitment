@@ -13,7 +13,7 @@ type Vacancy struct {
 	ID                   primitive.ObjectID    `bson:"_id,omitempty" json:"id"`
 	EmployerID           primitive.ObjectID    `bson:"employer_id" json:"employer_id"`
 	Position             string                `json:"position"`
-	Responsibilities     []string              `json:"responsibilities"`
+	Responsibilities     string              `json:"responsibilities"`
 	QualificationReqs    []string              `json:"qualification_reqs"`
 	WorkSchedule         string                `json:"work_schedule"`
 	WorkingConditions    *WorkingConditions    `json:"working_conditions,omitempty"`
@@ -42,7 +42,7 @@ type EmployeeExpectations struct {
 type CreateVacancyPayload struct {
 	EmployerID           primitive.ObjectID    `json:"employer_id" validate:"required"`
 	Position             string                `json:"position" validate:"required"`
-	Responsibilities     []string              `json:"responsibilities" validate:"required"`
+	Responsibilities     string              `json:"responsibilities" validate:"required"`
 	QualificationReqs    []string              `json:"qualification_reqs" validate:"required"`
 	WorkSchedule         string                `json:"work_schedule" validate:"required"`
 	WorkingConditions    *WorkingConditions    `json:"working_conditions,omitempty"`

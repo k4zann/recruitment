@@ -3,6 +3,7 @@ package vacancy
 import (
 	"fmt"
 	"net/http"
+	"recruitment/service/employer"
 	"recruitment/types"
 	"recruitment/utils"
 
@@ -13,11 +14,15 @@ import (
 )
 
 type VacancyHandler struct {
-	Store *Store
+	Store         *Store
+	EmployerStore *employer.Store
 }
 
-func NewVacancyHandler(Store *Store) *VacancyHandler {
-	return &VacancyHandler{Store: Store}
+func NewVacancyHandler(Store *Store, EmployerStore *employer.Store) *VacancyHandler {
+	return &VacancyHandler{
+		Store:         Store,
+		EmployerStore: EmployerStore,
+	}
 }
 
 func (h *VacancyHandler) RegisterRoutes(router *mux.Router) {
@@ -91,7 +96,6 @@ func (h *VacancyHandler) getVacancy(w http.ResponseWriter, r *http.Request) {
 		utils.WriteError(w, http.StatusInternalServerError, err)
 		return
 	}
-
 
 	utils.WriteJson(w, http.StatusOK, vacancy)
 }
