@@ -42,7 +42,7 @@
         }
     });
 
-    
+
 
     const toast = useToast();
 
@@ -100,12 +100,6 @@
         <div class="px-6 py-8 m-4 mb-4 bg-white border rounded-md shadow-md md:m-0">
           <form @submit.prevent="handleSubmit">
             <h2 class="mb-6 text-3xl font-semibold text-center">Добавить резюме</h2>
-
-            <!-- Employee ID -->
-            <!-- <div class="mb-4">
-              <label for="employee_id" class="block mb-2 font-bold text-gray-700">ID сотрудника</label>
-              <input v-model="form.employee_id" type="text" id="employee_id" class="w-full px-3 py-2 border rounded" required placeholder="Введите ID сотрудника" />
-            </div> -->
 
             <!-- Education Section -->
             <h3 class="mb-4 text-2xl font-semibold">Образование</h3>

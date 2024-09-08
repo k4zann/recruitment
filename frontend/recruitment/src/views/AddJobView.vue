@@ -3,11 +3,28 @@
   import axios from 'axios';
   import router from '@/router';
   import { useToast } from 'vue-toastification';
+  
+  const state = reactive({
+    isLoading: false,
+    employerId: '',
+  });
+
+  state.employerId = localStorage.getItem('employerId');
+  console.log('Employer ID:', state.employerId);
+
+  const contactInformationForm = reactive({
+    company_name: '',
+    sphere: '',
+    address: '',
+    telephone: '',
+    email: '',
+    number_of_employees: 0
+  });
 
   const form = reactive({
-    employer_id: '',
+    employer_id: state.employerId,
     position: '',
-    responsibilities: [],
+    responsibilities: '',
     qualification_reqs: [],
     work_schedule: '',
     working_conditions: {
@@ -31,9 +48,9 @@
 
   const handleSubmit = async () => {
     const newJob = {
-      employer_id: form.employer_id,
+      employer_id: state.employerId,
       position: form.position,
-      responsibilities: form.responsibilities.split(',').map(item => item.trim()), // Convert comma-separated text to an array
+      responsibilities: form.responsibilities, // Convert comma-separated text to an array
       qualification_reqs: form.qualification_reqs.split(',').map(item => item.trim()),
       work_schedule: form.work_schedule,
       working_conditions: {
@@ -54,12 +71,42 @@
     };
 
     try {
-      const response = await axios.post('/api/jobs', newJob);
+      state.isLoading = true;
+      const response = await axios.post('http://localhost:8080/api/vacancy', newJob);
       toast.success('Вакансия добавлена');
       router.push(`/jobs/${response.data.id}`);
     } catch (e) {
       console.error('Ошибка при добавлении вакансии', e);
       toast.error('Произошла ошибка');
+    } finally {
+      state.isLoading = false;
+      router.push('/jobs');
+    }
+  };
+
+  // submit employer
+  const submitEmployer = async () => {
+    const newEmployer = {
+      company_name: contactInformationForm.company_name,
+      sphere: contactInformationForm.sphere,
+      address: contactInformationForm.address,
+      telephone: contactInformationForm.telephone,
+      email: contactInformationForm.email,
+      number_of_employees: contactInformationForm.number_of_employees
+    };
+    
+    try {
+      state.isLoading = true;
+      const response = await axios.post('http://localhost:8080/api/employer', newEmployer);
+      state.employerId = response.data.id;
+      localStorage.setItem('employerId', response.data.id);
+      toast.success('Контактная информация добавлена');
+    } catch (e) {
+      console.error('Ошибка при добавлении контакной информации', e);
+      toast.error('Произошла ошибка');
+    } finally {
+      console.log('Employer ID:', form.employer_id);
+      state.isLoading = false;
     }
   };
 </script>
@@ -69,16 +116,60 @@
   <section class="bg-green-50">
     <div class="container max-w-2xl py-24 m-auto">
       <div class="px-6 py-8 m-4 mb-4 bg-white border rounded-md shadow-md md:m-0">
-        <form @submit.prevent="handleSubmit">
-          <h2 class="mb-6 text-3xl font-semibold text-center">Добавить вакансию</h2>
-
-          <!-- Employer ID (Consider selecting from available employers if applicable)
+        <form v-if="state.employerId === '' || state.employerId === null" @submit.prevent="submitEmployer">
+          <h2 class="mb-6 text-3xl font-semibold text-center">Добавить контактную информацию</h2>
+          <!-- Company Name -->
           <div class="mb-4">
-            <label for="employer_id" class="block mb-2 font-bold text-gray-700">ID Работодателя</label>
-            <input v-model="form.employer_id" type="text" id="employer_id" class="w-full px-3 py-2 border rounded" required placeholder="Введите ID работодателя" />
-            <p class="text-sm text-gray-500">Например, 12345</p>
-          </div> -->
+            <label for="company_name" class="block mb-2 font-bold text-gray-700">Название компании</label>
+            <input v-model="contactInformationForm.company_name" type="text" id="company_name" class="w-full px-3 py-2 border rounded" placeholder="Укажите название компании" required />
+            <p class="text-sm text-gray-500">Пример: ООО "Рога и копыта"</p>
+          </div>
 
+          <!-- Sphere -->
+          <div class="mb-4">
+            <label for="sphere" class="block mb-2 font-bold text-gray-700">Сфера деятельности</label>
+            <input v-model="contactInformationForm.sphere" type="text" id="sphere" class="w-full px-3 py-2 border rounded" placeholder="Укажите сферу деятельности" required />
+            <p class="text-sm text-gray-500">Пример: IT, медицина, образование</p>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-4">
+            <label for="address" class="block mb-2 font-bold text-gray-700">Адрес</label>
+            <input v-model="contactInformationForm.address" type="text" id="address" class="w-full px-3 py-2 border rounded" placeholder="Укажите адрес" required />
+            <p class="text-sm text-gray-500">Пример: г. Москва, ул. Ленина, д. 1</p>
+          </div>
+
+          <!-- Telephone -->
+          <div class="mb-4">
+            <label for="telephone" class="block mb-2 font-bold text-gray-700">Телефон</label>
+            <input v-model="contactInformationForm.telephone" type="tel" id="telephone" class="w-full px-3 py-2 border rounded" placeholder="Укажите телефон" required />
+            <p class="text-sm text-gray-500">Пример: +7 (999) 123-45-67</p>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-4">
+            <label for="email" class="block mb-2 font-bold text-gray-700">Email</label>
+            <input v-model="contactInformationForm.email" type="email" id="email" class="w-full px-3 py-2 border rounded" placeholder="Укажите email" required />
+            <p class="text-sm text-gray-500">Пример: name@gmail.com</p>
+          </div>
+
+          <!-- Number of Employees -->
+          <div class="mb-4">
+            <label for="number_of_employees" class="block mb-2 font-bold text-gray-700">Количество сотрудников</label>
+            <input v-model="contactInformationForm.number_of_employees" type="number" id="number_of_employees" class="w-full px-3 py-2 border rounded" placeholder="Укажите количество сотрудников" required />
+            <p class="text-sm text-gray-500">Пример: 100</p>
+          </div>
+
+          <!-- Submit Button -->
+          <div>
+            <button class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline" type="submit">
+              Добавить контактную информацию
+            </button>
+          </div>
+        </form>
+
+        <form v-else @submit.prevent="handleSubmit">
+          <h2 class="mb-6 text-3xl font-semibold text-center">Добавить вакансию</h2>
           <!-- Position -->
           <div class="mb-4">
             <label for="position" class="block mb-2 font-bold text-gray-700">Должность</label>

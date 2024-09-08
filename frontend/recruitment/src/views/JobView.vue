@@ -31,6 +31,11 @@
 
         const contactResponse = await axios.get(`http://localhost:8080/api/employer/${employerId}`);
 
+        if (contactResponse.status == 404 || jobResponse.status == 404) {
+            router.push('/not-found');
+            return;
+        }
+
         state.job = jobResponse.data;
         state.contactInformation = contactResponse.data;
     } catch (e) {
