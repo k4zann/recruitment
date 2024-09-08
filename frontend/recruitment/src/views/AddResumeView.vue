@@ -4,6 +4,22 @@
     import router from '@/router';
     import { useToast } from 'vue-toastification';
 
+    const state = reactive({
+        employeeId: '',
+        isLoading: false
+    });
+
+    state.employeeId = localStorage.getItem('employeeId');
+    
+    const contactInformationForm = reactive({
+        first_name: '',
+        last_name: '',
+        birth_date: '',
+        telephone: '',
+        email: '',
+        address: '',
+    });
+
     const form = reactive({
         employee_id: '',
         education: {
@@ -48,7 +64,7 @@
 
     const handleSubmit = async () => {
         const newResume = {
-            employee_id: form.employee_id,
+            employee_id: state.employeeId,
             education: {
                 institution_name: form.education.institution_name,
                 location: form.education.location,
@@ -84,21 +100,95 @@
         };
 
         try {
-            await axios.post('/api/resumes', newResume);
+            state.isLoading = true;
+            await axios.post('http://localhost:8080/api/resume', newResume);
             toast.success('Резюме было успешно добавлено');
             router.push(`/`);
         } catch (e) {
             console.error('Ошибка при добавлении резюме', e);
             toast.error('Произошла ошибка');
+        } finally {
+            state.isLoading = false;
         }
     };
+
+    const addLanguage = () => {
+        form.skills.languages.push({ language: '', level: '' });
+    };
+
+    const removeLanguage = (index) => {
+        form.skills.languages.splice(index, 1);
+    };
+
+    const addExperience = () => {
+        form.experience.push({
+            company_name: '',
+            position: '',
+            work_period: '',
+            responsibilities: ''
+        });
+    };
+
+    const removeExperience = (index) => {
+        form.experience.splice(index, 1);
+    };
+
+    const submitContactInformation = async () => {
+        try {
+            const response = await axios.post('http://localhost:8080/api/employee', contactInformationForm);
+            state.employeeId = response.data.id;
+            localStorage.setItem('employeeId', state.employeeId);
+            toast.success('Контактная информация была успешно добавлена');
+        } catch (e) {
+            console.error('Error submitting contact information', e);
+            toast.error('Произошла ошибка');
+        } finally {
+            state.isLoading = false;
+        }
+    }; 
 </script>
 
 <template>
     <section class="bg-green-50">
       <div class="container max-w-2xl py-24 m-auto">
         <div class="px-6 py-8 m-4 mb-4 bg-white border rounded-md shadow-md md:m-0">
-          <form @submit.prevent="handleSubmit">
+          <form v-if="state.employeeId === '' || state.employeeId === null">
+            <h2 class="mb-6 text-3xl font-semibold text-center">Добавить контактную информацию</h2>
+            <div class="mb-4">
+              <label for="first_name" class="block mb-2 font-bold text-gray-700">Имя</label>
+              <input v-model="contactInformationForm.first_name" type="text" id="first_name" class="w-full px-3 py-2 border rounded" placeholder="Введите ваше имя" />
+            </div>
+            <div class="mb-4">
+              <label for="last_name" class="block mb-2 font-bold text-gray-700">Фамилия</label>
+              <input v-model="contactInformationForm.last_name" type="text" id="last_name" class="w-full px-3 py-2 border rounded" placeholder="Введите вашу фамилию" />
+            </div>
+            <div class="mb-4">
+              <label for="birth_date" class="block mb-2 font-bold text-gray-700">Дата рождения</label>
+              <input v-model="contactInformationForm.birth_date" type="date" id="birth_date" class="w-full px-3 py-2 border rounded" />
+            </div>
+            <div class="mb-4">
+              <label for="telephone" class="block mb-2 font-bold text-gray-700">Телефон</label>
+              <input v-model="contactInformationForm.telephone" type="text" id="telephone" class="w-full px-3 py-2 border rounded" placeholder="Введите ваш номер телефона" />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block mb-2 font-bold text-gray-700">Email</label>
+              <input v-model="contactInformationForm.email" type="email" id="email" class="w-full px-3 py-2 border rounded" placeholder="Введите ваш email" />
+            </div>
+            <div class="mb-4">
+              <label for="address" class="block mb-2 font-bold text-gray-700">Адрес</label>
+              <input v-model="contactInformationForm.address" type="text" id="address" class="w-full px-3 py-2 border rounded" placeholder="Введите ваш адрес" />
+            </div>
+            <div>
+              <button
+                @click.prevent="submitContactInformation"
+                class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline"
+              >
+                Добавить контактную информацию
+              </button>
+            </div>
+          </form>
+
+          <form v-else @submit.prevent="handleSubmit">
             <h2 class="mb-6 text-3xl font-semibold text-center">Добавить резюме</h2>
 
             <!-- Education Section -->
