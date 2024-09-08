@@ -10,7 +10,7 @@
     });
 
     state.employeeId = localStorage.getItem('employeeId');
-    
+
     const contactInformationForm = reactive({
         first_name: '',
         last_name: '',
@@ -221,29 +221,38 @@
               <input v-model="form.skills.personal_qualities" type="text" id="personal_qualities" class="w-full px-3 py-2 border rounded" placeholder="Например: коммуникабельность, ответственность" />
             </div>
             <div class="mb-4">
-              <label for="language" class="block mb-2 font-bold text-gray-700">Языки</label>
-              <input v-model="form.skills.languages[0].language" type="text" id="language" class="w-full px-3 py-2 border rounded" placeholder="Укажите язык" />
-              <input v-model="form.skills.languages[0].level" type="text" id="level" class="w-full px-3 py-2 border rounded mt-2" placeholder="Уровень владения (например, B2)" />
+                <label for="languages" class="block mb-2 font-bold text-gray-700">Языки</label>
+                <div v-for="(language, index) in form.skills.languages" :key="index" class="flex items-center mb-4">
+                    <input v-model="language.language" type="text" class="w-1/2 px-3 py-2 border rounded" placeholder="Язык" />
+                    <input v-model="language.level" type="text" class="w-1/2 px-3 py-2 border rounded" placeholder="Уровень" />
+                    <button @click.prevent="removeLanguage(index)" class="ml-2 text-red-500">Удалить</button>
+                </div>
+                <button @click.prevent="addLanguage" class="text-green-500">Добавить язык</button>
             </div>
 
             <!-- Experience Section -->
             <h3 class="mb-4 text-2xl font-semibold">Опыт работы</h3>
-            <div class="mb-4">
-              <label for="company_name" class="block mb-2 font-bold text-gray-700">Название компании</label>
-              <input v-model="form.experience[0].company_name" type="text" id="company_name" class="w-full px-3 py-2 border rounded" placeholder="Укажите название компании" />
+            <div v-for="(exp, index) in form.experience" :key="index" class="mb-4">
+            <label for="company_name" class="block mb-2 font-bold text-gray-700">Название компании</label>
+            <input v-model="exp.company_name" type="text" id="company_name" class="w-full px-3 py-2 border rounded" placeholder="Укажите название компании" />
+
+            <label for="position" class="block mt-4 mb-2 font-bold text-gray-700">Должность</label>
+            <input v-model="exp.position" type="text" id="position" class="w-full px-3 py-2 border rounded" placeholder="Укажите вашу должность" />
+
+            <label for="work_period" class="block mt-4 mb-2 font-bold text-gray-700">Период работы</label>
+            <input v-model="exp.work_period" type="text" id="work_period" class="w-full px-3 py-2 border rounded" placeholder="Пример: 2010-2014" />
+
+            <label for="responsibilities" class="block mt-4 mb-2 font-bold text-gray-700">Обязанности</label>
+            <textarea v-model="exp.responsibilities" id="responsibilities" class="w-full px-3 py-2 border rounded" rows="4" placeholder="Опишите ваши обязанности"></textarea>
+
+            <button @click.prevent="removeExperience(index)" class="mt-2 text-red-500">
+                <i class="pi pi-minus mr-1"></i> Удалить
+            </button>
             </div>
-            <div class="mb-4">
-              <label for="position" class="block mb-2 font-bold text-gray-700">Должность</label>
-              <input v-model="form.experience[0].position" type="text" id="position" class="w-full px-3 py-2 border rounded" placeholder="Укажите занимаемую должность" />
-            </div>
-            <div class="mb-4">
-              <label for="work_period" class="block mb-2 font-bold text-gray-700">Период работы</label>
-              <input v-model="form.experience[0].work_period" type="text" id="work_period" class="w-full px-3 py-2 border rounded" placeholder="Пример: Январь 2015 - Март 2020" />
-            </div>
-            <div class="mb-4">
-              <label for="responsibilities" class="block mb-2 font-bold text-gray-700">Обязанности</label>
-              <textarea v-model="form.experience[0].responsibilities" id="responsibilities" class="w-full px-3 py-2 border rounded" rows="4" placeholder="Опишите ваши обязанности"></textarea>
-            </div>
+
+            <button @click.prevent="addExperience" class="mt-4 text-blue-500 flex items-center">
+            <i class="pi pi-plus mr-1"></i> Добавить опыт работы
+            </button>
 
             <!-- Job Expectation Section -->
             <h3 class="mb-4 text-2xl font-semibold">Ожидания от работы</h3>
