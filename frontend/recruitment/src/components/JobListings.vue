@@ -22,7 +22,7 @@
 
     onMounted(async () => {
         try {
-            const response = await axios.get('/api/jobs');
+            const response = await axios.get('http://localhost:8080/api/vacancies');
             state.jobs = response.data;
         } catch(e) {
             console.error('error fetching jobs', e);
