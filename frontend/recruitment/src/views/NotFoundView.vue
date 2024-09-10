@@ -9,7 +9,7 @@
       <p class="text-xl mb-5">Этой страницы не существует</p>
       <RouterLink
         to="/"
-        class="text-white bg-green-700 hover:bg-green-900 rounded-md px-3 py-2 mt-4"
+        class="text-white bg-blue-900 hover:bg-blue-900 rounded-md px-3 py-2 mt-4"
         >Вернуться назад</RouterLink
       >
     </section>

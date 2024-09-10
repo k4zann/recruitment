@@ -25,11 +25,11 @@
 
     onMounted(async () => {
     try {
-        const jobResponse = await axios.get(`http://localhost:8080/api/vacancy/${jobId}`);
+        const jobResponse = await axios.get(`https://mavi-0svz.onrender.com/api/vacancy/${jobId}`);
 
         const employerId = jobResponse.data.employer_id._id || jobResponse.data.employer_id.toString();
 
-        const contactResponse = await axios.get(`http://localhost:8080/api/employer/${employerId}`);
+        const contactResponse = await axios.get(`https://mavi-0svz.onrender.com/api/employer/${employerId}`);
 
         if (contactResponse.status == 404 || jobResponse.status == 404) {
             router.push('/not-found');
@@ -49,7 +49,7 @@
 
 <template>
   <BackButton/>
-  <section v-if="!state.isLoading" class="bg-green-50">
+  <section v-if="!state.isLoading" class="bg-blue-50">
     <div class="container px-6 py-10 m-auto">
       <div class="grid w-full grid-cols-1 gap-6 md:grid-cols-70/30">
         <main>
@@ -64,33 +64,33 @@
           </div>
 
           <div class="p-6 mt-6 bg-white rounded-lg shadow-md">
-            <h3 class="mb-6 text-lg font-bold text-green-800">Responsibilities</h3>
+            <h3 class="mb-6 text-lg font-bold text-blue-800">Обязанности</h3>
             <p class="mb-4">{{ state.job.responsibilities }}</p>
 
-            <h3 class="mb-2 text-lg font-bold text-green-800">Qualification Requirements</h3>
+            <h3 class="mb-2 text-lg font-bold text-blue-800">Требования к квалификации</h3>
             <ul class="list-disc pl-4 mb-4">
               <li v-for="(req, index) in state.job.qualification_reqs" :key="index">{{ req }}</li>
             </ul>
 
-            <h3 class="mb-2 text-lg font-bold text-green-800">Working Conditions</h3>
+            <h3 class="mb-2 text-lg font-bold text-blue-800">Условия труда</h3>
             <ul class="list-disc pl-4 mb-4">
-              <li>Accessibility: {{ state.job.working_conditions.accessibility }}</li>
-              <li>Equipment: {{ state.job.working_conditions.equipment }}</li>
-              <li>Special Conditions: {{ state.job.working_conditions.special_conditions }}</li>
-              <li>Safety: {{ state.job.working_conditions.safety }}</li>
+              <li>Доступность: {{ state.job.working_conditions.accessibility }}</li>
+              <li>Оборудование: {{ state.job.working_conditions.equipment }}</li>
+              <li>Особые условия: {{ state.job.working_conditions.special_conditions }}</li>
+              <li>Безопасность: {{ state.job.working_conditions.safety }}</li>
             </ul>
 
-            <h3 class="mb-2 text-lg font-bold text-green-800">Social Benefits</h3>
+            <h3 class="mb-2 text-lg font-bold text-blue-800">Социальные льготы</h3>
             <ul class="list-disc pl-4 mb-4">
-              <li>Medical Care: {{ state.job.social_benefits.medical_care }}</li>
-              <li>Social Compensation: {{ state.job.social_benefits.social_compensation }}</li>
-              <li>Professional Growth: {{ state.job.social_benefits.professional_growth }}</li>
+              <li>Медицинское обслуживание: {{ state.job.social_benefits.medical_care }}</li>
+              <li>Социальная компенсация: {{ state.job.social_benefits.social_compensation }}</li>
+              <li>Профессиональный рост: {{ state.job.social_benefits.professional_growth }}</li>
             </ul>
 
-            <h3 class="mb-2 text-lg font-bold text-green-800">Employee Expectations</h3>
+            <h3 class="mb-2 text-lg font-bold text-blue-800">Ожидания сотрудников</h3>
             <ul class="list-disc pl-4 mb-4">
-              <li>Team Interaction: {{ state.job.employee_expectations.team_interaction }}</li>
-              <li>Quality and Productivity: {{ state.job.employee_expectations.quality_and_productivity }}</li>
+              <li>Взаимодействие в команде: {{ state.job.employee_expectations.team_interaction }}</li>
+              <li>Качество и производительность: {{ state.job.employee_expectations.quality_and_productivity }}</li>
             </ul>
           </div>
         </main>
@@ -99,20 +99,20 @@
         <aside>
           <!-- Company Info -->
           <div class="p-6 bg-white rounded-lg shadow-md">
-            <h3 class="mb-6 text-xl font-bold">Company Information</h3>
+            <h3 class="mb-6 text-xl font-bold">Информация о компании</h3>
             <h2 class="text-2xl">{{ state.contactInformation.company_name }}</h2>
             <p class="my-2">{{ state.contactInformation.sphere }}</p>
 
             <hr class="my-4" />
 
             <h3 class="text-xl">Email:</h3>
-            <p class="p-2 my-2 font-bold bg-green-100">{{ state.contactInformation.email }}</p>
+            <p class="p-2 my-2 font-bold bg-blue-100">{{ state.contactInformation.email }}</p>
 
-            <h3 class="text-xl">Phone Number:</h3>
-            <p class="p-2 my-2 font-bold bg-green-100">{{ state.contactInformation.telephone }}</p>
+            <h3 class="text-xl">Номер телефона:</h3>
+            <p class="p-2 my-2 font-bold bg-blue-100">{{ state.contactInformation.telephone }}</p>
 
-            <h3 class="text-xl">Number of Employees:</h3>
-            <p class="p-2 my-2 font-bold bg-green-100">{{ state.contactInformation.number_of_employees }}</p>
+            <h3 class="text-xl">Количество сотрудников:</h3>
+            <p class="p-2 my-2 font-bold bg-blue-100">{{ state.contactInformation.number_of_employees }}</p>
           </div>
 
           <!-- Manage -->
@@ -120,7 +120,7 @@
             <h3 class="mb-6 text-xl font-bold">Manage Job</h3>
             <RouterLink
               :to="`/jobs/edit/${state.job.id}`"
-              class="block w-full px-4 py-2 mt-4 font-bold text-center text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline"
+              class="block w-full px-4 py-2 mt-4 font-bold text-center text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline"
               >Edit Job</RouterLink
             >
             <button

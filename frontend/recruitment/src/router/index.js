@@ -5,6 +5,7 @@ import NotFoundView from '@/views/NotFoundView.vue';
 import JobView from '@/views/JobView.vue';
 import AddJobView from '@/views/AddJobView.vue';
 import AddResumeView from '@/views/AddResumeView.vue';
+import AdminView from '@/views/AdminView.vue';
 
 const router = createRouter({
     history: createWebHistory(
@@ -38,7 +39,12 @@ const router = createRouter({
             path: '/resume/add',
             name: 'add-resume',
             component: AddResumeView
-        }
+        },
+        {
+            path: '/admin',
+            name: 'admin',
+            component: AdminView
+        },
     ]
 });
 

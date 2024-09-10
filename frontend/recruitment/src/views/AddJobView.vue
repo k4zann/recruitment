@@ -72,7 +72,7 @@
 
     try {
       state.isLoading = true;
-      const response = await axios.post('http://localhost:8080/api/vacancy', newJob);
+      const response = await axios.post('https://mavi-0svz.onrender.com/api/vacancy', newJob);
       toast.success('Вакансия добавлена');
       router.push(`/jobs/${response.data.id}`);
     } catch (e) {
@@ -97,7 +97,7 @@
     
     try {
       state.isLoading = true;
-      const response = await axios.post('http://localhost:8080/api/employer', newEmployer);
+      const response = await axios.post('https://mavi-0svz.onrender.com/api/employer', newEmployer);
       state.employerId = response.data.id;
       localStorage.setItem('employerId', response.data.id);
       toast.success('Контактная информация добавлена');
@@ -113,7 +113,7 @@
 
 
 <template>
-  <section class="bg-green-50">
+  <section class="bg-blue-50">
     <div class="container max-w-2xl py-24 m-auto">
       <div class="px-6 py-8 m-4 mb-4 bg-white border rounded-md shadow-md md:m-0">
         <form v-if="state.employerId === '' || state.employerId === null" @submit.prevent="submitEmployer">
@@ -162,7 +162,7 @@
 
           <!-- Submit Button -->
           <div>
-            <button class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline" type="submit">
+            <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline" type="submit">
               Добавить контактную информацию
             </button>
           </div>
@@ -271,7 +271,7 @@
 
           <!-- Submit Button -->
           <div>
-            <button class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline" type="submit">
+            <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline" type="submit">
               Добавить вакансию
             </button>
           </div>
