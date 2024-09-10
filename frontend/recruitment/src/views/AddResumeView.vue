@@ -227,7 +227,7 @@
                     <input v-model="language.level" type="text" class="w-1/2 px-3 py-2 border rounded" placeholder="Уровень" />
                     <button @click.prevent="removeLanguage(index)" class="ml-2 text-red-500">Удалить</button>
                 </div>
-                <button @click.prevent="addLanguage" class="text-blue-500">Добавить язык</button>
+                <button @click.prevent="addLanguage" class="text-darker-blue">Добавить язык</button>
             </div>
 
             <!-- Experience Section -->
@@ -250,7 +250,7 @@
             </button>
             </div>
 
-            <button @click.prevent="addExperience" class="mt-4 text-blue-500 flex items-center">
+            <button @click.prevent="addExperience" class="mt-4 text-darker-blue flex items-center">
             <i class="pi pi-plus mr-1"></i> Добавить опыт работы
             </button>
 
@@ -304,7 +304,7 @@
             <!-- Submit Button -->
             <div>
               <button
-                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline"
+                class="w-full px-4 py-2 font-bold text-white bg-darker-blue rounded-full hover:bg-gray-600 focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Добавить резюме

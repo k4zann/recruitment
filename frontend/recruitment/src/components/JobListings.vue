@@ -35,7 +35,7 @@
 <template>
     <section class="px-4 py-10 bg-blue-50">
         <div class="m-auto container-xl lg:container">
-            <h2 class="mb-6 text-3xl font-bold text-center text-blue-500">
+            <h2 class="mb-6 text-3xl font-bold text-center text-darker-blue">
                 Найти работу
             </h2>
             <div v-if="state.isLoading" class="py-6 text-center text-gray-500">

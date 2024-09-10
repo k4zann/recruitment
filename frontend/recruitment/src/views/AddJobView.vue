@@ -271,7 +271,7 @@
 
           <!-- Submit Button -->
           <div>
-            <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline" type="submit">
+            <button class="w-full px-4 py-2 font-bold text-white bg-darker-blue rounded-full hover:bg-gray-600 focus:outline-none focus:shadow-outline" type="submit">
               Добавить вакансию
             </button>
           </div>

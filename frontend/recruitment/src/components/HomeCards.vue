@@ -19,14 +19,14 @@
               Добавить резюме
             </RouterLink>
           </Card>
-          <Card bg="bg-blue-100">
+          <Card bg="bg-gray-200">
             <h2 class="text-2xl font-bold">Для работодателей</h2>
             <p class="mt-2 mb-4">
                 Разместите объявление о вакансии, чтобы найти идеального кандидата на эту роль
             </p>
             <RouterLink
               to="/jobs/add"
-              class="inline-block bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              class="inline-block bg-darker-blue text-white rounded-lg px-4 py-2 hover:bg-gray-600"
             >
               Добавить вакансию
             </RouterLink>

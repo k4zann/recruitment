@@ -1,5 +1,5 @@
 <script setup>
-  import logoMavi from '@/assets/img/logo_mavi.png';
+  import logoMavi from '@/assets/img/mavi_logo.png';
   import {RouterLink, useRoute } from 'vue-router';
   import { ref } from 'vue';
   const mobileMenuOpen = ref(false);
@@ -10,16 +10,13 @@
 </script>
 
 <template>
-  <nav class="bg-blue-900 border-b border-green-500">
+  <nav class="bg-white  border-b border-darker-blue">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex h-20 items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center">
           <RouterLink class="flex flex-shrink-0 items-center mr-4" to="/">
-            <img class="h-20 w-auto" :src="logoMavi" alt="Recruitment" /> <!-- Increased logo size -->
-            <span class="hidden md:block text-white text-2xl font-bold ml-2"
-              >Mavi Jobs</span
-            >
+            <img class="h-64 w-auto" :src="logoMavi" alt="Recruitment" /> <!-- Increased logo size -->
           </RouterLink>
         </div>
 
@@ -28,28 +25,28 @@
             to="/"
             :class="[isActiveLink('/') 
               ? 'bg-gray-900' 
-              : 'hover:bg-gray-900 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+              : 'hover:bg-gray-900 hover:text-white', isActiveLink('/') ? 'text-white' : 'text-blue-900', 'px-3', 'py-2', 'rounded-md']"
             >Главная</RouterLink
           >
           <RouterLink
             to="/jobs"
             :class="[isActiveLink('/jobs') 
               ? 'bg-gray-900' 
-              : 'hover:bg-gray-900 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+              : 'hover:bg-gray-900 hover:text-white', isActiveLink('/jobs') ? 'text-white' : 'text-blue-900', 'px-3', 'py-2', 'rounded-md']"
             >Вакансии</RouterLink
           >
           <RouterLink
             to="/jobs/add"
             :class="[isActiveLink('/jobs/add') 
               ? 'bg-gray-900' 
-              : 'hover:bg-gray-900 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+              : 'hover:bg-gray-900 hover:text-white', isActiveLink('/jobs/add') ? 'text-white' : 'text-blue-900', 'px-3', 'py-2', 'rounded-md']"
             >Добавить вакансию</RouterLink
           >
           <RouterLink
             to="/resume/add"
             :class="[isActiveLink('/resume/add') 
               ? 'bg-gray-900' 
-              : 'hover:bg-gray-900 hover:text-white', 'text-white', 'px-3', 'py-2', 'rounded-md']"
+              : 'hover:bg-gray-900 hover:text-white', isActiveLink('/resume/add') ? 'text-white' : 'text-blue-900', 'px-3', 'py-2', 'rounded-md']"
             >Добавить резюме</RouterLink
           >
         </div>
@@ -73,28 +70,28 @@
           <RouterLink
             to="/"
             :class="[isActiveLink('/') 
-              ? 'bg-blue-900' 
+              ? 'bg-darker-blue' 
               : 'hover:bg-gray-900 hover:text-white', 'block', 'text-white', 'px-3', 'py-2', 'rounded-md']"
             >Главная</RouterLink
           >
           <RouterLink
             to="/jobs"
             :class="[isActiveLink('/jobs') 
-              ? 'bg-blue-900' 
+              ? 'bg-darker-blue' 
               : 'hover:bg-gray-900 hover:text-white', 'block', 'text-white', 'px-3', 'py-2', 'rounded-md']"
             >Вакансии</RouterLink
           >
           <RouterLink
             to="/jobs/add"
             :class="[isActiveLink('/jobs/add') 
-              ? 'bg-blue-900' 
+              ? 'bg-darker-blue' 
               : 'hover:bg-gray-900 hover:text-white', 'block', 'text-white', 'px-3', 'py-2', 'rounded-md']"
             >Добавить вакансию</RouterLink
           >
           <RouterLink
             to="/resume/add"
             :class="[isActiveLink('/resume/add') 
-              ? 'bg-blue-900' 
+              ? 'bg-darker-blue' 
               : 'hover:bg-gray-900 hover:text-white', 'block', 'text-white', 'px-3', 'py-2', 'rounded-md']"
             >Добавить резюме</RouterLink
           >

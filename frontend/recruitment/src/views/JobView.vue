@@ -106,13 +106,13 @@
             <hr class="my-4" />
 
             <h3 class="text-xl">Email:</h3>
-            <p class="p-2 my-2 font-bold bg-blue-100">{{ state.contactInformation.email }}</p>
+            <p class="p-2 my-2 font-bold bg-darker-blue bg-opacity-10">{{ state.contactInformation.email }}</p>
 
             <h3 class="text-xl">Номер телефона:</h3>
-            <p class="p-2 my-2 font-bold bg-blue-100">{{ state.contactInformation.telephone }}</p>
+            <p class="p-2 my-2 font-bold bg-darker-blue bg-opacity-10">{{ state.contactInformation.telephone }}</p>
 
             <h3 class="text-xl">Количество сотрудников:</h3>
-            <p class="p-2 my-2 font-bold bg-blue-100">{{ state.contactInformation.number_of_employees }}</p>
+            <p class="p-2 my-2 font-bold bg-darker-blue bg-opacity-10">{{ state.contactInformation.number_of_employees }}</p>
           </div>
 
           <!-- Manage -->
