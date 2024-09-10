@@ -19,7 +19,7 @@ func init() {
 	// 	log.Fatal("Error loading .env file")
 	// }
 
-	mongoClient, err = mongo.Connect(context.Background(),
+	mongoClient, err := mongo.Connect(context.Background(),
 		options.Client().ApplyURI(
 			os.Getenv("DB_LINK"),
 		),
