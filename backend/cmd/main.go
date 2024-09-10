@@ -18,12 +18,13 @@ func init() {
 	// 	log.Fatal("Error loading .env file")
 	// }
 
-	mongoClient, err := mongo.Connect(context.Background(),
+	var err error
+	mongoClient, err = mongo.Connect(context.Background(),
 		options.Client().ApplyURI(
 			"mongodb+srv://arshataitkozha:010arshat@recruitment.ak2m2.mongodb.net/?retryWrites=true&w=majority&appName=Recruitment",
 		),
 	)
-	if err != nil {
+	if err != nil || mongoClient == nil {
 		log.Fatal("Error connecting to MongoDB ", err)
 	}
 
@@ -36,16 +37,21 @@ func init() {
 }
 
 func main() {
-
+	// Ensure mongoClient is not nil before disconnecting
+	if mongoClient == nil {
+		log.Fatal("mongoClient is nil, cannot proceed")
+	}
 	defer mongoClient.Disconnect(context.Background())
 
 	log.Println(mongoClient)
 
+	// Initialize the database
 	db := mongoClient.Database("recruitment")
 	if db == nil {
 		log.Fatal("Failed to initialize ApiServer: Database is nil")
 	}
 
+	// Start the API server
 	server := api.NewApiServer(
 		":8080",
 		db,
@@ -55,5 +61,4 @@ func main() {
 		log.Fatal("Error running server ", err)
 	}
 	log.Println("Starting server on :8080")
-
 }
