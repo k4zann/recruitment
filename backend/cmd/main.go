@@ -6,7 +6,6 @@ import (
 	"os"
 	"recruitment/cmd/api"
 
-	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -15,10 +14,10 @@ import (
 var mongoClient *mongo.Client
 
 func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 
 	mongoClient, err = mongo.Connect(context.Background(),
 		options.Client().ApplyURI(
