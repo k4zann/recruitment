@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"os"
 	"recruitment/cmd/api"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -21,7 +20,7 @@ func init() {
 
 	mongoClient, err := mongo.Connect(context.Background(),
 		options.Client().ApplyURI(
-			os.Getenv("DB_LINK"),
+			"mongodb+srv://arshataitkozha:010arshat@recruitment.ak2m2.mongodb.net/?retryWrites=true&w=majority&appName=Recruitment",
 		),
 	)
 	if err != nil {
