@@ -38,7 +38,7 @@ func init() {
 
 func main() {
 
-	defer mongoClient.Disconnect(context.Background())
+	// defer mongoClient.Disconnect(context.Background())
 
 	db := mongoClient.Database(os.Getenv("DB_NAME"))
 	if db == nil {
