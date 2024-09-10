@@ -38,9 +38,11 @@ func init() {
 
 func main() {
 
-	// defer mongoClient.Disconnect(context.Background())
+	defer mongoClient.Disconnect(context.Background())
 
-	db := mongoClient.Database(os.Getenv("DB_NAME"))
+	log.Println(mongoClient)
+
+	db := mongoClient.Database("recruitment")
 	if db == nil {
 		log.Fatal("Failed to initialize ApiServer: Database is nil")
 	}
