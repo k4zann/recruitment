@@ -101,7 +101,7 @@
 
         try {
             state.isLoading = true;
-            await axios.post('http://localhost:8080/api/resume', newResume);
+            await axios.post('https://mavi-0svz.onrender.com/api/resume', newResume);
             toast.success('Резюме было успешно добавлено');
             router.push(`/`);
         } catch (e) {
@@ -135,7 +135,7 @@
 
     const submitContactInformation = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/api/employee', contactInformationForm);
+            const response = await axios.post('https://mavi-0svz.onrender.com/api/employee', contactInformationForm);
             state.employeeId = response.data.id;
             localStorage.setItem('employeeId', state.employeeId);
             toast.success('Контактная информация была успешно добавлена');
@@ -149,7 +149,7 @@
 </script>
 
 <template>
-    <section class="bg-green-50">
+    <section class="bg-blue-50">
       <div class="container max-w-2xl py-24 m-auto">
         <div class="px-6 py-8 m-4 mb-4 bg-white border rounded-md shadow-md md:m-0">
           <form v-if="state.employeeId === '' || state.employeeId === null">
@@ -181,7 +181,7 @@
             <div>
               <button
                 @click.prevent="submitContactInformation"
-                class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline"
               >
                 Добавить контактную информацию
               </button>
@@ -227,7 +227,7 @@
                     <input v-model="language.level" type="text" class="w-1/2 px-3 py-2 border rounded" placeholder="Уровень" />
                     <button @click.prevent="removeLanguage(index)" class="ml-2 text-red-500">Удалить</button>
                 </div>
-                <button @click.prevent="addLanguage" class="text-green-500">Добавить язык</button>
+                <button @click.prevent="addLanguage" class="text-blue-500">Добавить язык</button>
             </div>
 
             <!-- Experience Section -->
@@ -304,7 +304,7 @@
             <!-- Submit Button -->
             <div>
               <button
-                class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Добавить резюме

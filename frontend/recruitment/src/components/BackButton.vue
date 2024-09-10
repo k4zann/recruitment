@@ -7,7 +7,7 @@
       <div class="container px-6 py-6 m-auto">
         <RouterLink
           to="/jobs"
-          class="flex items-center text-green-500 hover:text-green-600"
+          class="flex items-center text-blue-500 hover:text-blue-600"
         >
           <i class="mr-2 pi pi-arrow-circle-left"></i> Вернуться к списку
         </RouterLink>

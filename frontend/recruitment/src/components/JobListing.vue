@@ -33,12 +33,12 @@
                 <div>
                     {{ truncatedDescription }}                    
                 </div>
-                <button @click="toggleDescription" class="text-green-500 hover:text-green-600 mb-5">
+                <button @click="toggleDescription" class="text-blue-500 hover:text-blue-600 mb-5">
                     {{ showFullDescription ? 'Меньше' : 'Еще' }}
                 </button>
               </div>
 
-              <!-- <h3 class="text-green-500 mb-2">{{ job.salary }} / Year</h3> -->
+              <!-- <h3 class="text-blue-500 mb-2">{{ job.salary }} / Year</h3> -->
 
               <div class="border border-gray-100 mb-5"></div>
 
@@ -49,7 +49,7 @@
                 </div> -->
                 <RouterLink
                   :to="'/jobs/' + job.id"
-                  class="h-[36px] bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+                  class="h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                   Подробнее
                 </RouterLink>

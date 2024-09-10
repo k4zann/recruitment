@@ -22,7 +22,7 @@
 
     onMounted(async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/vacancies');
+            const response = await axios.get('https://mavi-0svz.onrender.com/api/vacancies');
             state.jobs = response.data;
         } catch(e) {
             console.error('error fetching jobs', e);
@@ -35,7 +35,7 @@
 <template>
     <section class="px-4 py-10 bg-blue-50">
         <div class="m-auto container-xl lg:container">
-            <h2 class="mb-6 text-3xl font-bold text-center text-green-500">
+            <h2 class="mb-6 text-3xl font-bold text-center text-blue-500">
                 Найти работу
             </h2>
             <div v-if="state.isLoading" class="py-6 text-center text-gray-500">
