@@ -54,7 +54,7 @@
         <div class="md:hidden flex items-center">
           <button
             type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-blue-800 focus:outline-none"
+            class="inline-flex items-center justify-center p-2 rounded-md text-darker-blu focus:outline-none"
             aria-expanded="false"
             @click="mobileMenuOpen = !mobileMenuOpen"
           >
@@ -65,8 +65,8 @@
         </div>
       </div>
 
-      <div v-if="mobileMenuOpen" class="md:hidden">
-        <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+      <div v-if="mobileMenuOpen" class="md:hidden bg-darker-blue">
+        <div class="space-y-1 pt-2 pb-3 sm:px-3">
           <RouterLink
             to="/"
             :class="[isActiveLink('/') 

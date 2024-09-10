@@ -6,23 +6,35 @@
     <div class="bg-darker-blue py-4">
         <div class="max-w-screen-lg px-4 sm:px-6 text-gray-800 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
             <div class="p-5">
-                <h3 class="font-bold text-xl text-white">Mavi Jobs</h3>
+                <h3 class="text-base sm:text-lg text-white font-bold">Mavi Jobs</h3>
             </div>
             <div class="p-5">
-                <div class="text-sm uppercase text-white font-bold">Для работадателей</div>
-                <RouterLink class="my-3 block text-gray-100" to="/jobs/add">Добавить вакансию <span class="text-white text-xs p-1"></span></RouterLink>
+                <div class="text-base sm:text-lg uppercase text-white font-bold">Для работодателей</div>
+                <RouterLink class="my-3 block text-sm sm:text-base text-gray-100" to="/jobs/add">
+                    Добавить вакансию <span class="text-white text-xs p-1"></span>
+                </RouterLink>
             </div>
+
             <div class="p-5">
-                <div class="text-sm uppercase text-white font-bold">Для работников</div>
-                <RouterLink class="my-3 block text-gray-100" to="/resume/add">Добавить вакансию <span class="text-white text-xs p-1"></span></RouterLink>
-                <RouterLink class="my-3 block text-gray-100" to="/jobs">Вакансии <span class="text-white text-xs p-1"></span></RouterLink>
+                <div class="text-base sm:text-lg uppercase text-white font-bold">Для работников</div>
+                <RouterLink class="my-3 block text-sm sm:text-base text-gray-100" to="/resume/add">
+                    Добавить резюме <span class="text-white text-xs p-1"></span>
+                </RouterLink>
+                <RouterLink class="my-3 block text-sm sm:text-base text-gray-100" to="/jobs">
+                    Вакансии <span class="text-white text-xs p-1"></span>
+                </RouterLink>
             </div>
+
             <div class="p-5">
-                <div class="text-sm uppercase text-white font-bold">Связитесь с нами</div>
-                <div class="my-3 block text-gray-100" to="/">Астана, Казахстан
-                    <span class="text-white text-xs p-1"></span></div><div class="my-3 block text-gray-100" to="/">mavi-jobs@gmail.com
-                    <span class="text-white text-xs p-1"></span></div>
+                <div class="text-base sm:text-lg uppercase text-white font-bold">Свяжитесь с нами</div>
+                <div class="my-3 block text-sm sm:text-base text-gray-100">
+                    Астана, Казахстан <span class="text-white text-xs p-1"></span>
+                </div>
+                <div class="my-3 block text-sm sm:text-base text-gray-100">
+                    mavi-jobs@gmail.com <span class="text-white text-xs p-1"></span>
+                </div>
             </div>
+
          </div>
     </div>
 
