@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "vue-instagram-embed": "^1.0.0",
     "vue-router": "^4.4.3"
   }
 }

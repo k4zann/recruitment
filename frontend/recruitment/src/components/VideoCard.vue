@@ -1,22 +1,24 @@
 <script setup>
 import { ref, computed } from 'vue';
+import InstagramEmbed from 'vue-instagram-embed';
 
-    const props = defineProps({
-    video: String, 
-    });
+const props = defineProps({
+    video: String,
+});
 
-    const videoEmbedUrl = computed(() => {
+const videoEmbedUrl = computed(() => {
     if (props.video.includes('youtube.com') || props.video.includes('youtu.be')) {
         const videoIdMatch = props.video.match(/(?:v=|youtu\.be\/|embed\/)([^&?/]+)/);
         return videoIdMatch ? `https://www.youtube.com/embed/${videoIdMatch[1]}` : '';
     } else if (props.video.includes('instagram.com')) {
-        return `https://www.instagram.com/embed.js`;
+        const postMatch = props.video.match(/https:\/\/www\.instagram\.com\/p\/([^\/]+)/);
+        return postMatch ? props.video : ''; 
     }
     return '';
-    });
+});
 
-    const isYouTube = computed(() => props.video.includes('youtube.com') || props.video.includes('youtu.be'));
-    const isInstagram = computed(() => props.video.includes('instagram.com'));
+const isYouTube = computed(() => props.video.includes('youtube.com') || props.video.includes('youtu.be'));
+const isInstagram = computed(() => props.video.includes('instagram.com'));
 </script>
 
 <template>
@@ -32,12 +34,10 @@ import { ref, computed } from 'vue';
           ></iframe>
         </template>
         <template v-if="isInstagram">
-          <iframe
-            title="Instagram Video"
-            :src="videoEmbedUrl"
-            allowfullscreen
-            class="w-full h-full rounded-lg"
-          ></iframe>
+          <instagram-embed
+            :url="videoEmbedUrl"
+            :class_name="'w-full h-full rounded-lg'"
+          />
         </template>
       </div>
     </div>
