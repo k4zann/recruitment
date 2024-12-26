@@ -5,8 +5,6 @@ import 'vue-toastification/dist/index.css';
 
 import router from './router';
 
-<script async src="https://www.instagram.com/embed.js"></script>
-
 export default function (Vue, { head }) {
     head.script.push({
       src: 'https://www.instagram.com/embed.js',
