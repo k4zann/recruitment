@@ -12,11 +12,6 @@ export default function (Vue, { head }) {
       src: 'https://www.instagram.com/embed.js',
       async: true
     })
-  
-    head.meta.push({
-      name: 'keywords',
-      content: 'HTML,CSS,XML,JavaScript'
-    })
   }
   
 
