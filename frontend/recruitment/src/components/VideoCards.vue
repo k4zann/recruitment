@@ -14,7 +14,7 @@ const videos = [
       <h2 class="mb-6 text-3xl font-bold text-center text-darker-blue">
         Полезное
       </h2>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <VideoCard
           v-for="video in videos"
           :key="video"
